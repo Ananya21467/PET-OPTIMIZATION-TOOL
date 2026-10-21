@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1e8;
+            color: #29483b;
+            min-height: 100vh;
+        }
+
+        /* Header */
+
+        header {
+            padding: 22px 50px;
+            background: #dcebdc;
+            border-bottom: 1px solid #c5d8c7;
+        }
+
+        header h1 {
+            font-size: 26px;
+            color: #315c49;
+        }
+
+        header p {
+            margin-top: 5px;
+            font-size: 15px;
+            color: #527261;
+        }
+
+        /* Profile Card */
+
+        main {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(41, 72, 59, 0.12);
+            text-align: center;
+        }
+
+        main h2 {
+            margin-bottom: 18px;
+        }
+
+        main p {
+            margin-bottom: 45px;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .other-pet-group{
+            display: none;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #315c49;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #c8d8ca;
+            border-radius: 10px;
+            background: #f8faf7;
+            font-size: 15px;
+            color: #29483b;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #6f9b7d;
+            box-shadow: 0 0 0 3px rgba(111, 155, 125, 0.12);
+        }
+
+        #petPhoto {
+            padding: 10px;
+            background: #eef5ee;
+            border: 1px dashed #9bb9a1;
+            cursor: pointer;
+        }
+
+        /* Continue Button */
+
+        #continueBtn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #315c49;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #continueBtn:hover {
+            background: #244b39;
+            transform: translateY(-2px);
+        }
+
+        
+/* Mobile Responsive Fix */
+@media screen and (max-width: 600px) {
+
+    header {
+        padding: 18px 10px;
+    }
+
+    header h1 {
+        font-size: clamp(16px, 4.5vw, 23px);
+        line-height: 1.35;
+        white-space: nowrap;
+        letter-spacing: -0.6px;
+    }
+
+    header p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-top: 6px;
+    }
+
+    main {
+        width: calc(100% - 24px);
+        margin: 24px auto;
+        padding: 28px 18px;
+        border-radius: 20px;
+    }
+
+    main h2 {
+        font-size: 23px;
+        line-height: 1.3;
+    }
+
+    main p {
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 16px;
+        min-width: 0;
+    }
+
+    #petPhoto {
+        max-width: 100%;
+    }
+
+    #continueBtn {
+        min-height: 48px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🐾 Pet Optimization Tool</h1>
+        <p>Create your pet profile</p>
+    </header>
+
+    <main>
+
+        <h2>Create Your Pet Profile</h2>
+
+        <p>
+            Tell us a little about your pet to get personalized care suggestions.
+        </p>
+
+        <!-- Pet Name -->
+
+        <div class="form-group">
+            <label for="petName">Pet Name</label>
+            <input type="text" id="petName" placeholder="Enter your pet's name">
+        </div>
+
+        <!-- Pet Type -->
+
+        <div class="form-group">
+            <label for="petType">Pet Type</label>
+            <select id="petType">
+                <option value="">Select your pet type</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
+
+        
+        <!-- Pet Age -->
+
+        <div class="form-group">
+            <label for="petAge">Pet Age</label>
+            <input
+                type="number"
+                id="petAge"
+                placeholder="Enter age in years"
+                min="0"
+            >
+        </div>
+
+        <!-- Gender -->
+
+        <div class="form-group">
+            <label for="petGender">Gender</label>
+            <select id="petGender">
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <!-- Weight -->
+
+        <div class="form-group">
+            <label for="petWeight">Weight</label>
+            <input
+                type="number"
+                id="petWeight"
+                placeholder="Enter weight in kg"
+                min="0"
+            >
+        </div>
+
+        <!-- Pet Photo -->
+
+        <div class="form-group">
+            <label for="petPhoto">Pet Photo</label>
+            <input
+                type="file"
+                id="petPhoto"
+                accept="image/*"
+            >
+        </div>
+
+        <!-- Continue -->
+
+        <button id="continueBtn">Continue</button>
+
+    </main>
+
+    
+<script>
+
+    // Compress the selected photo to help it fit in localStorage
+    function processPetPhoto(file) {
+        return new Promise((resolve, reject) => {
+            if (!file) {
+                resolve(localStorage.getItem("petPhoto") || "");
+                return;
+            }
+
+            if (!file.type.startsWith("image/")) {
+                reject(new Error("Please select a valid image."));
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const image = new Image();
+
+                image.onload = function () {
+                    const canvas = document.createElement("canvas");
+                    const maxSize = 700;
+
+                    let width = image.width;
+                    let height = image.height;
+
+                    if (width > maxSize || height > maxSize) {
+                        const scale = Math.min(
+                            maxSize / width,
+                            maxSize / height
+                        );
+
+                        width = Math.round(width * scale);
+                        height = Math.round(height * scale);
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const context = canvas.getContext("2d");
+                    context.drawImage(image, 0, 0, width, height);
+
+                    resolve(canvas.toDataURL("image/jpeg", 0.7));
+                };
+
+                image.onerror = () => {
+                    reject(new Error("Could not read the selected image."));
+                };
+
+                image.src = reader.result;
+            };
+
+            reader.onerror = () => {
+                reject(new Error("Could not load the selected photo."));
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Save profile and continue to dashboard
+    document.getElementById("continueBtn").onclick = async function () {
+        const petName = document.getElementById("petName").value.trim();
+        const petType = document.getElementById("petType").value;
+        const petAge = document.getElementById("petAge").value;
+        const petGender = document.getElementById("petGender").value;
+        const petWeight = document.getElementById("petWeight").value;
+        const photoFile = document.getElementById("petPhoto").files[0];
+
+        // Basic validation
+        if (!petName || !petType || !petAge || !petGender || !petWeight) {
+            alert("Please fill in all required pet details.");
+            return;
+        }
+
+        if (Number(petAge) < 0 || Number(petWeight) <= 0) {
+            alert("Please enter a valid age and weight.");
+            return;
+        }
+
+        this.disabled = true;
+        this.textContent = "Saving...";
+
+        try {
+            const petPhoto = await processPetPhoto(photoFile);
+
+            // Keep the existing keys so other pages can use them
+            localStorage.setItem("petName", petName);
+            localStorage.setItem("petType", petType);
+            localStorage.setItem("petAge", petAge);
+            localStorage.setItem("petGender", petGender);
+            localStorage.setItem("petWeight", petWeight);
+            localStorage.setItem("petPhoto", petPhoto);
+
+            alert("Pet profile saved successfully! 🐾");
+
+            window.location.href = "dashboard.html";
+
+        } catch (error) {
+            console.error("Profile saving error:", error);
+
+            alert(
+                "Could not save the profile or photo. Try a smaller image, " +
+                "or remove the photo and try again."
+            );
+
+            this.disabled = false;
+            this.textContent = "Continue";
+        }
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease & Precautions</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #29483b;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #315c49;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin-bottom: 6px;
+        }
+
+        header p {
+            color: #dcebdc;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .pet-selection {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #0000000d;
+        }
+
+        .pet-selection label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b8cdbd;
+            border-radius: 8px;
+            background: white;
+            color: #29483b;
+            font-size: 16px;
+        }
+
+        #profileMessage {
+            font-size: 13px;
+            margin-top: 8px;
+            color: #557361;
+        }
+
+        .section-title {
+            margin: 25px 0 15px;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        
+.disease-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #dfe8df;
+    border-left: 5px solid #6b9b78;
+    box-shadow: 0 5px 16px rgba(41, 72, 59, 0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.disease-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(41, 72, 59, 0.13);
+}
+
+
+        
+.disease-card h3 {
+    color: #315c49;
+    font-size: 21px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.disease-card p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #617469;
+}
+
+.disease-card strong {
+    color: #29483b;
+    font-weight: 700;
+}
+
+
+        .vet-box {
+            background: #fff3df;
+            border-left: 5px solid #d79a37;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 10px;
+        }
+
+        .vet-box h2 {
+            margin-bottom: 8px;
+            color: #80531b;
+        }
+
+        .disclaimer {
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+       
+.back-button {
+    display: inline-block;
+    background: #315c49;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(41, 72, 59, 0.12);
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.back-button:hover {
+    background: #244735;
+    transform: translateY(-2px);
+}
+
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #557361;
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+            .disease-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🐾 Disease & Precautions</h1>
+        <p>Understand your pet's health and care for them better.</p>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <h2>Keep Your Pet Healthy 💚</h2>
+            <p>Learn about common health problems, warning signs and preventive care.</p>
+        </section>
+
+        <section class="pet-selection">
+            <label for="petType">Select Your Pet</label>
+
+            <select id="petType">
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+
+            <p id="profileMessage"></p>
+        </section>
+
+        <h2 class="section-title">Common Diseases & Care</h2>
+
+        <section id="diseaseList" class="disease-grid">
+            <!-- Disease information will appear here -->
+        </section>
+
+        <section class="vet-box">
+            <h2>⚠️ When Should You Visit a Vet?</h2>
+            <p>
+                Seek veterinary help if your pet has difficulty breathing,
+                collapses, has seizures, experiences severe bleeding, cannot
+                urinate, or may have swallowed something poisonous.
+            </p>
+            <p>
+                Repeated vomiting, persistent diarrhoea, loss of appetite,
+                unusual weakness or sudden behaviour changes also need prompt
+                veterinary advice.
+            </p>
+            <p class="disclaimer">
+                <strong>Important:</strong> This page provides general
+                educational information, not a diagnosis. Do not give human
+                medicines or start treatment without veterinary guidance.
+            </p>
+        </section>
+
+        <a href="dashboard.html" class="back-button">← Back to Dashboard</a>
+
+    </main>
+
+    <footer>
+        <p>Pet Optimization Tool | Care with Love 🐾</p>
+    </footer>
+
+    <script>
+        const petType = document.getElementById("petType");
+        const diseaseList = document.getElementById("diseaseList");
+        const profileMessage = document.getElementById("profileMessage");
+
+        // Load the pet type saved on the Pet Profile page.
+        const savedPetType = localStorage.getItem("petType");
+        
+        if (savedPetType && [...petType.options].some(
+            option => option.value === savedPetType
+        )) {
+            petType.value = savedPetType;
+            profileMessage.textContent =
+                "Showing information for the pet saved in your profile.";
+        } else {
+            petType.value = "dog";
+            profileMessage.textContent =
+                "No saved pet profile found. Showing dog information by default.";
+        }
+
+        const diseaseData = {
+            dog: [
+                {
+                    name: "Parvovirus",
+                    symptoms: "Vomiting, severe diarrhoea, weakness and loss of appetite.",
+                    precautions: "Keep vaccinations up to date. Avoid contact with potentially infected dogs and contaminated areas."
+                },
+                {
+                    name: "Kennel Cough",
+                    symptoms: "A persistent, dry, hacking cough and sometimes sneezing.",
+                    precautions: "Avoid close contact with sick dogs and ask a vet about vaccination and appropriate care."
+                },
+                {
+                    name: "Skin Problems",
+                    symptoms: "Itching, redness, hair loss or irritated skin.",
+                    precautions: "Use suitable grooming products, maintain cleanliness and seek advice for persistent skin changes."
+                },
+                {
+                    name: "Tick and Flea Infestation",
+                    symptoms: "Scratching, visible parasites or irritated skin.",
+                    precautions: "Check the coat regularly and use only vet-recommended parasite prevention."
+                }
+            ],
+
+            cat: [
+                {
+                    name: "Upper Respiratory Infection",
+                    symptoms: "Sneezing, nasal discharge, watery eyes or reduced appetite.",
+                    precautions: "Keep the cat comfortable, reduce exposure to sick cats and consult a vet if symptoms persist."
+                },
+                {
+                    name: "Feline Panleukopenia",
+                    symptoms: "Vomiting, diarrhoea, fever and severe weakness.",
+                    precautions: "Vaccination and good hygiene are important. Seek urgent veterinary care if suspected."
+                },
+                {
+                    name: "Skin Problems",
+                    symptoms: "Hair loss, itching, scabs or redness.",
+                    precautions: "Check for fleas and skin changes. Get persistent symptoms examined by a vet."
+                },
+                {
+                    name: "Urinary Problems",
+                    symptoms: "Straining to urinate, frequent litter-box visits or blood in urine.",
+                    precautions: "Provide fresh water. Straining with little or no urine is an emergency, especially in male cats."
+                }
+            ]
+        };
+
+        function updateDiseaseContent() {
+            const selectedPet = petType.value;
+            const diseases = diseaseData[selectedPet] || diseaseData.other;
+
+            diseaseList.innerHTML = "";
+
+            diseases.forEach(disease => {
+                const card = document.createElement("article");
+                card.className = "disease-card";
+
+                const heading = document.createElement("h3");
+                heading.textContent = disease.name;
+
+                const symptoms = document.createElement("p");
+                const symptomsLabel = document.createElement("strong");
+                symptomsLabel.textContent = "Symptoms: ";
+                symptoms.append(symptomsLabel, disease.symptoms);
+
+                const precautions = document.createElement("p");
+                const precautionsLabel = document.createElement("strong");
+                precautionsLabel.textContent = "Precautions: ";
+                precautions.append(precautionsLabel, disease.precautions);
+
+                card.append(heading, symptoms, precautions);
+                diseaseList.appendChild(card);
+            });
+
+            if (selectedPet === "other" && otherPet) {
+                profileMessage.textContent =
+                    "Your profile lists: " + otherPet +
+                    ". These are general precautions; guidance depends on the exact species.";
+            }
+        }
+
+        petType.addEventListener("change", function () {
+            profileMessage.textContent =
+                "Showing general information for the selected pet type.";
+            updateDiseaseContent();
+        });
+
+        updateDiseaseContent();
+    </script>
+
+</body>
+</html>

@@ -1285,6 +1285,7 @@ async function findSavedPet(petName, species) {
             }
 
             alert("Vaccination record saved to the database!");
+             await loadVaccinationRecords();
             recordForm.reset();
             dateGivenInput.max = getTodayString();
 

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Suggestions</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+    body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #29483b;
+        }
+header {
+    padding: 30px 60px;
+    background: #315c49;
+    color: #ffffff;
+    border-bottom: 4px solid #a8c9ad;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #e0eee2;
+    font-size: 16px;
+    line-height: 1.6;
+}
+ main{
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+.food-intro{
+            margin-bottom: 30px;
+        }
+
+ .food-intro h2{
+            font-size: 32px;
+            color: #244b39;
+            margin-bottom: 8px;
+        }
+ .food-intro p{
+            color: #718177;
+            font-size: 16px;
+        }
+
+  .food-options{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+  .food-card{
+            background: white;
+            padding: 28px;
+            min-height: 150px;
+            border-radius: 20px;
+            margin-top: 30px;
+
+            border: 1px solid #dfe8df;
+            box-shadow: 0 8px 25px rgba(41, 71, 59, 0.07);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+      .food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(41, 71, 59, 0.12);
+}
+
+  .food-card h3{
+            font-size: 21px;
+            color: #315c49;
+            margin-bottom: 12px;
+        }
+
+  .food-card p{
+            color: #718177;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+ @media(max-width: 700px){
+ header{
+            padding: 24px;
+          }
+          header h1{
+            font-size: 26px;
+          }
+          header p {
+        font-size: 14px;
+    }
+ main{
+            width: 92%;
+            margin: 30px auto;
+          }
+
+ .food-options{
+            grid-template-columns: 1fr;
+          }
+ #foodQuery{
+            width: 100%;
+            margin-bottom: 12px;
+          }
+ .food-search button{
+            width: 100%;
+            margin-left: 0;
+          }
+
+ .avoid-grid{
+         grid-template-columns: 1fr;
+          }
+}
+ .food-search{
+            margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #dfe8df;
+            box-shadow: 0 8px 25px rgba(41, 72, 59, 0.07);
+          }
+
+ .food-search h2{
+            color: #315c49;
+            font-size: 24px;
+            margin-bottom: 8px;
+          }
+ .food-search > p{
+            color: #718177;
+            margin-bottom: 20px;
+          }
+
+ #foodQuery{
+            width: 75%;
+            padding: 14px;
+            border: 1px solid #dfe8df;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+          }
+ #foodQuery:focus{
+            border-color: #315c49
+          }
+
+ .food-search button{
+            padding: 14px 22px;
+            margin-left: 8px;
+            border: none;
+            border-radius: 12px;
+            background: #315c49;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+          }
+ .food-search button:hover{
+            background: #244b39;
+          }
+ #foodResult{
+            margin-top: 20px;
+            padding: 18px;
+            background: #f4f7f3;
+            border-radius: 12px;
+            color: #718177;
+          }
+
+ #foodResult h3{
+            color: #315c49;
+            margin-bottom: 8px;
+          }
+
+ #avoid-food {
+    margin-top: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #dfe8df;
+    box-shadow: 0 8px 25px rgba(41, 72, 59, 0.07);
+}
+
+#avoid-food h2 {
+    color: #315c49;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.avoid-intro {
+    color: #718177;
+    font-size: 15px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.avoid-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.avoid-card {
+    background: #f4f7f3;
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.avoid-card h3 {
+    color: #315c49;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.avoid-card p {
+    color: #718177;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Food gallery section */
+.food-gallery {
+    margin-top: 35px;
+}
+
+.gallery-heading {
+    margin-bottom: 22px;
+}
+
+.gallery-heading h2 {
+    color: #315c49;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.gallery-heading p {
+    color: #718177;
+    line-height: 1.6;
+}
+
+/* Category filter buttons */
+.food-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.filter-btn {
+    padding: 11px 18px;
+    border: 1px solid #dfe8df;
+    border-radius: 25px;
+    background: white;
+    color: #315c49;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #315c49;
+    color: white;
+    border-color: #315c49;
+}
+
+/* Food cards grid */
+.food-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.gallery-food-card {
+    background: white;
+    border: 1px solid #dfe8df;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(41, 71, 59, 0.06);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.gallery-food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 26px rgba(41, 71, 59, 0.12);
+}
+
+.gallery-food-card img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.gallery-food-info {
+    padding: 18px;
+}
+
+.gallery-food-info h3 {
+    color: #315c49;
+    font-size: 18px;
+    margin-bottom: 9px;
+}
+
+.gallery-food-info p {
+    color: #718177;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Responsive layout */
+@media (max-width: 800px) {
+    .food-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .food-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-food-card img {
+        height: 210px;
+    }
+
+    .filter-btn {
+        padding: 10px 14px;
+    }
+}
+
+
+
+/* Page Navigation */
+.page-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: calc(100% - 40px);
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 14px 18px;
+    background: #e5efe6;
+    border: 1px solid #d2e3d5;
+    border-radius: 18px;
+    box-shadow: 0 3px 10px rgba(41, 72, 59, 0.08);
+}
+
+.page-navigation a,
+.page-navigation a:link,
+.page-navigation a:visited {
+    display: inline-block;
+    padding: 10px 17px;
+    background: #ffffff;
+    color: #29483b !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #c4d8c8;
+    border-radius: 25px;
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+}
+
+.page-navigation a:hover {
+    background: #315c49;
+    color: #ffffff !important;
+    border-color: #315c49;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .page-navigation {
+        width: calc(100% - 24px);
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .page-navigation a {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+    <h1>🍎 Food suggestions</h1>
+    <p>Healthy food choices for your pet.</p>
+
+
+<nav class="page-navigation">
+    <a href="dashboard.html">← Back to Dashboard</a>
+    <a href="medicine.html">Medicine</a>
+    <a href="disease.html">Disease</a>
+    <a href="vaccination.html">Vaccination</a>
+</nav>
+
+    </header>
+
+    <main>
+        <section class="food-intro">
+            <h2>Choose the right food 🐾</h2>
+            <p>Find healthy and suitble food options for your 
+                <strong id="petTypeDisplay"></strong>.
+            </p>
+        </section>
+        
+<section class="food-gallery">
+
+    <div class="gallery-heading">
+        <h2>🥗 Explore Pet Foods</h2>
+        <p>Browse food options for your furry friend.</p>
+    </div>
+
+    <div class="food-filters">
+        <button class="filter-btn active" data-category="all">
+            All Foods
+        </button>
+
+        <button class="filter-btn" data-category="dry">
+            Dry Food
+        </button>
+
+        <button class="filter-btn" data-category="wet">
+            Wet Food
+        </button>
+
+        <button class="filter-btn" data-category="treats">
+            Treats
+        </button>
+
+        <button class="filter-btn" data-category="fruits">
+            Fruits & Veggies
+        </button>
+    </div>
+
+    <div class="food-gallery-grid" id="foodGallery">
+        <!-- Food image cards will appear here -->
+    </div>
+
+</section>
+
+
+        <section class="food-options">
+            <div class="food-card">
+            <h3>🥩 Protein-rich Food</h3>
+            <p id="proteinText">Helps support growth, muscles and energy.</p>
+            </div>
+       
+
+        <div class="food-card">
+            <h3>🥕 Vegetables</h3>
+            <p id="vegetableText">Some Vegetablescan provide useful vitamins and nutrients.</p>
+        </div>
+
+        <div class="food-card">
+            <h3>🍚 Balanced Diet</h3>
+            <p id="balancedText">A balanced diet helos maintain your pet's overall health.</p>
+        </div>
+
+         </section>
+
+         <section class="food-search">
+            <h2>🔍 Ask About Food</h2>
+            <p>Want to know if a dood is safe for your pet?</p>
+
+            <input type="text" id="foodQuery" placeholder="e.g. Can my pet eat banana?">
+
+            <button onclick="searchFood()">Search</button>
+            <div id="foodResult"></div>
+         </section>
+
+         <section id="avoid-food">
+            <h2>🚫 Foods to Avoid</h2>
+            <p class="avoid-intro">Some foods can be harmful to pets. Avoid giving these foods without proper guidance.</p>
+            <div class="avoid-grid" id="avoidGrid">
+                <div class="avoid-card">
+                    <h3>🍫 Chocolate</h3>
+                    <p>Can be harmful to dogs and cats.</p>
+                </div>
+                <div class="avoid-card">
+                    <h3>🧅 Onion</h3>
+                    <p>Can cause health problems in pets when consumed in harmful amounts.</p>
+                </div>
+
+                <div class="avoid-card">
+                    <h3>🍇 Grapes & Raisins</h3>
+                    <p>Can be dangerous for dogs and should be avoided.</p>
+                </div>
+
+                <div class="avoid-card">
+                    <h3>🍺 Alcohol</h3>
+                    <p>Alcohol is unsafe for pets and should not be give to them.</p>
+                </div>
+            </div>
+         </section>
+    </main>
+
+    <script>
+        const petType = localStorage.getItem("petType");
+        const petTypeDisplay = document.getElementById("petTypeDisplay");
+        const proteinText = document.getElementById("proteinText");
+        const vegetableText = document.getElementById("vegetableText");
+        const balancedText = document.getElementById("balancedText");
+
+        const avoidGrid = document.getElementById("avoidGrid");
+        
+const foodGallery = document.getElementById("foodGallery");
+
+const dogFoods = [
+    {
+        name: "Dry Dog Food",
+        category: "dry",
+        image: "images/dog-dry-food.jpg",
+        description: "Convenient complete dog food. Choose a formula suitable for your dog's age and needs."
+    },
+    {
+        name: "Wet Dog Food",
+        category: "wet",
+        image: "images/dog-wet-food.jpg",
+        description: "Moist food that can help provide variety. Choose a complete and balanced formula."
+    },
+    {
+        name: "Dog Treats",
+        category: "treats",
+        image: "images/dog-treats.jpg",
+        description: "Use suitable dog treats in moderation as part of a balanced diet."
+    },
+    {
+        name: "Carrots",
+        category: "fruits",
+        image: "images/dog-carrots.jpg",
+        description: "Plain, washed carrot in small, bite-sized pieces can be an occasional dog treat."
+    }
+];
+
+const catFoods = [
+    {
+        name: "Dry Cat Food",
+        category: "dry",
+        image: "images/cat-dry-food.jpg",
+        description: "Choose complete cat food formulated for your cat's age and life stage."
+    },
+    {
+        name: "Wet Cat Food",
+        category: "wet",
+        image: "images/cat-wet-food.jpg",
+        description: "Moist food can help increase water intake. Choose a complete and balanced formula."
+    },
+    {
+        name: "Cat Treats",
+        category: "treats",
+        image: "images/cat-treats.jpg",
+        description: "Choose treats made for cats and offer them in moderation."
+    },
+    {
+        name: "Plain Cooked Chicken",
+        category: "fruits",
+        image: "images/cat-chicken.jpg",
+        description: "A little plain, fully cooked, boneless chicken may be an occasional treat, not a complete diet."
+    }
+];
+
+function renderFoodGallery(category = "all") {
+    const foods = petType === "dog"
+        ? dogFoods
+        : petType === "cat"
+            ? catFoods
+            : [];
+
+    if (foods.length === 0) {
+        foodGallery.innerHTML =
+            "<p>Please select Dog or Cat in your pet profile first.</p>";
+        return;
+    }
+
+    const filteredFoods = category === "all"
+        ? foods
+        : foods.filter(food => food.category === category);
+
+    foodGallery.innerHTML = filteredFoods.map(food => `
+        <article class="gallery-food-card">
+            <img
+                src="${food.image}"
+                alt="${food.name}"
+                loading="lazy"
+            >
+            <div class="gallery-food-info">
+                <h3>${food.name}</h3>
+                <p>${food.description}</p>
+            </div>
+        </article>
+    `).join("");
+}
+
+renderFoodGallery();
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const category = button.dataset.category;
+
+        renderFoodGallery(category);
+    });
+});
+
+
+
+       if (petType === "dog" || petType === "cat") {
+    petTypeDisplay.textContent = petType;
+} else {
+    petTypeDisplay.textContent = "your pet";
+}
+
+        if(petType === "dog"){
+            proteinText.textContent = "Cooked, unseasoned meat can be offered as a treat alongside a complete, balanced dog food. Avoid cooked bones.";
+            vegetableText.textContent = "Some dogs can eat small portions of plain, dog-safe vegetables such as carrots. Avoid onions and garlic.";
+            balancedText.textContent = "Choose a complete, balanced dog food suitable for your dog's age and life stage. Treats should make up only a small part of the diet.";
+        }
+        else if(petType === "cat"){
+            proteinText.textContent = "Feed a complete, balanced cat food that provides animal-based protein. Plain, fully cooked meat without seasoning may be offered occasionally as a treat.";
+            vegetableText.textContent = "Cats don't need vegetables in their diet. Their main nutrition should come from complete, balanced cat food.";
+            balancedText.textContent = "Choose complete cat food appropriate for your cat's age and life stage. Keep fresh water available every day.";
+        }
+
+       
+
+        if(petType === "dog"){
+            avoidGrid.innerHTML = `
+            <div class="avoid-card">
+                <h3>🍫 Chocolate</h3>
+                <p>Chocoloate contains theobromine and caffeine, which are toxic to dogs and can cause serious illness.</p>
+           </div>
+           
+           <div class="avoid-card">
+                <h3>🍇 Grapes & Raisins</h3>
+                <p>Grapes and raisins can cause acute kidney injury in dogs. Even small amounts may be dangerous, so contact a veterinarian promptly if your dog eats them.</p>
+           </div>
+           
+           <div class="avoid-card">
+                <h3>🧅 Onion & Garlic</h3>
+                <p>Onions and garlic can damage a dog's red blood cells and may cause anemia. Avoid feeding them, whether raw, cooked, or powdered.</p>
+           </div> 
+           <div class="avoid-card">
+                <h3>🍺 Alcohol</h3>
+                <p>Alcohol is toxic to dogs and can cause vomiting, poor coordination, breathing difficulties, and potentially life-threatening illness.</p>
+           </div>`;
+        }
+
+        if(petType === "cat"){
+            avoidGrid.innerHTML = `
+            <div class="avoid-card">
+                <h3>🍫 Chocolate</h3>
+                <p>Chocolate contains theobromine and caffeine, which are toxic to cats and can cause serious illness.</p>
+           </div>
+           
+           <div class="avoid-card">
+                <h3>☕ Caffeine</h3>
+                <p>Caffeine can be toxic to cats and may cause restlessness, a rapid heartbeat, tremors, and other serious symptoms.</p>
+           </div>
+           
+           <div class="avoid-card">
+                <h3>🧅 Onion & Garlic</h3>
+                <p>Onions and garlic can damage a cat's red blood cells and may cause anemia. Avoid them in raw, cooked, and powdered forms.</p>
+           </div> 
+           <div class="avoid-card">
+                <h3>🍺 Alcohol</h3>
+                <p>Alcohol is toxic to cats and can cause vomiting, poor coordination, breathing difficulties, and potentially life-threatening illness.</p>
+           </div>`;
+        }
+
+        
+        function searchFood() {
+    const query = document.getElementById("foodQuery").value.toLowerCase().trim();
+    const result = document.getElementById("foodResult");
+
+    if (query === "") {
+    result.innerHTML = `
+        <h3>🔎 Enter a food name</h3>
+        <p>Please type a food name before clicking Search.</p>
+    `;
+    return;
+}
+
+    if (query.includes("banana")) {
+    result.innerHTML = `
+        <h3>🍌 Banana</h3>
+        <p>
+            Plain banana may be offered to dogs in small amounts as an
+            occasional treat. Cats generally do not need fruit, and any
+            banana should only be a tiny, occasional taste. Remove the peel
+            and cut it into small pieces. If your pet has a medical condition
+            or a special diet, ask your veterinarian first.
+        </p>
+    `;
+}
+   else if (query.includes("milk")) {
+    result.innerHTML = `
+        <h3>🥛 Milk</h3>
+        <p>
+            Cow's milk is not recommended as a regular drink for dogs or cats.
+            Many pets may have digestive upset, including diarrhoea.
+            Keep fresh water available instead. Kittens should receive
+            appropriate kitten milk replacer if needed, not cow's milk.
+        </p>
+    `;
+}
+   else if (query.includes("chocolate")) {
+    result.innerHTML = `
+        <h3>🚫 Chocolate — Unsafe for Dogs and Cats</h3>
+        <p>
+            Chocolate contains theobromine and caffeine, which are toxic
+            to dogs and cats. The risk depends on the type and amount eaten
+            and your pet's size. If your pet has eaten chocolate, contact
+            a veterinarian immediately. Do not wait for symptoms or try
+            home remedies unless your veterinarian advises you to.
+        </p>
+    `;
+}
+else if (
+    query.includes("grape") ||
+    query.includes("raisin")
+) {
+    result.innerHTML = `
+        <h3>🚫 Grapes & Raisins</h3>
+        <p>
+            Grapes and raisins can cause serious kidney injury in dogs.
+            Their safety for cats is also uncertain, so do not offer them.
+            If your pet eats grapes or raisins, contact a veterinarian
+            promptly, even if your pet seems fine.
+        </p>
+    `;
+}
+else if (
+    query.includes("onion") ||
+    query.includes("garlic")
+) {
+    result.innerHTML = `
+        <h3>🚫 Onion & Garlic</h3>
+        <p>
+            Onions and garlic can damage the red blood cells of dogs
+            and cats. Avoid feeding them in raw, cooked, powdered, or
+            seasoned forms. If your pet eats onion or garlic, contact
+            a veterinarian for advice.
+        </p>
+    `;
+}
+    else {
+        result.innerHTML = `
+            <h3>🔎 Information not available</h3>
+            <p>
+                We don't have information about this food yet.
+            </p>
+        `;
+    }
+}
+    </script>
+</body>
+</html>

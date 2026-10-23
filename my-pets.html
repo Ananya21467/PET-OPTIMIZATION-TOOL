@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pets | Pet Optimization Tool</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8f5;
+            color: #29483b;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #29483b;
+            color: white;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 9px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .page-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .page-heading h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #66766d;
+            font-size: 15px;
+        }
+
+        .add-btn {
+            background: #315c49;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #244b39;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .pet-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(41, 72, 59, 0.08);
+            border: 1px solid #e5ebe5;
+        }
+
+        .pet-photo {
+            height: 190px;
+            background: #e5eee5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 65px;
+        }
+
+        .pet-details {
+            padding: 20px;
+        }
+
+        .pet-details h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .pet-details p {
+            color: #66766d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .view-btn {
+            display: block;
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            background: #dcebdc;
+            color: #244b39;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            background: #c9dfca;
+        }
+
+        
+.delete-btn {
+    background: #fce8e6;
+    color: #a52822;
+    border: 1px solid #f2c4c0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #f5d0cc;
+    transform: translateY(-1px);
+}
+
+.delete-btn:focus-visible {
+    outline: 2px solid #a52822;
+    outline-offset: 2px;
+}
+
+
+        .empty-message {
+            background: white;
+            border: 1px dashed #b7cabb;
+            border-radius: 14px;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 20px;
+        }
+
+        .empty-message .paw {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .empty-message h3 {
+            margin-bottom: 10px;
+        }
+
+        .empty-message p {
+            color: #66766d;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 17px 20px;
+            }
+
+            header h1 {
+                font-size: 19px;
+            }
+
+            .page-container {
+                padding: 25px 16px;
+            }
+
+            .page-heading h2 {
+                font-size: 24px;
+            }
+
+            .add-btn {
+                width: 100%;
+            }
+
+            .pets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            
+            .pet-card {
+                padding: 18px;
+                gap: 14px;
+            }
+
+            .pet-details {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .view-btn {
+                margin-top: 12px;
+                padding: 13px 12px;
+                font-size: 14px;
+            }
+
+            .add-btn {
+                margin-bottom: 10px;
+            }
+
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <header>
+        <h1>🐾 Pet Optimization Tool</h1>
+        <button class="logout-btn" id="logoutBtn" type="button">
+            Logout
+        </button>
+    </header>
+
+    <main class="page-container">
+        <section class="page-heading">
+            <div>
+                <h2>My Pets 🐶🐱</h2>
+                <p>Manage your pets and view their health information.</p>
+            </div>
+
+            <button class="add-btn" id="addPetBtn" type="button">
+                + Add Another Pet
+            </button>
+        </section>
+
+        <section class="pets-grid" id="petsGrid" hidden>
+            <!-- Saved pet cards will be loaded here -->
+        </section>
+
+        <section class="empty-message" id="emptyMessage">
+            <div class="paw">🐾</div>
+            <h3>No Pet Profiles Yet</h3>
+            <p>
+                Add your first pet to start managing its food,
+                medicine, disease and vaccination information.
+            </p>
+
+            <button class="add-btn" id="firstPetBtn" type="button">
+                Create Pet Profile
+            </button>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("addPetBtn").addEventListener("click", function () {
+            window.location.href = "pet-profile.html";
+        });
+
+        document.getElementById("firstPetBtn").addEventListener("click", function () {
+            window.location.href = "pet-profile.html";
+        });
+
+       
+document.getElementById("logoutBtn").addEventListener("click", async function () {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        alert("Logout failed. Please try again.");
+        return;
+    }
+
+    window.location.href = "login.html";
+});
+
+
+        const SUPABASE_URL = "https://lqyjdprlgulcqnagpisr.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iNhGuMwP7Ro8RBne6MLuDQ_mth-P02n";
+
+    const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+    async function checkLogin() {
+        const { data, error } = await supabaseClient.auth.getSession();
+
+        if (error || !data.session) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        console.log("Logged-in user:", data.session.user.email);
+    }
+
+    checkLogin();
+    
+async function loadMyPets() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error || !data.session) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const accessToken = data.session.access_token;
+
+    try {
+        const response = await fetch(
+            "https://pet-optimization-backend.chaudharyananya267.workers.dev/api/pets",
+            {
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not load pets");
+        }
+
+        const pets = await response.json();
+
+        const petsGrid = document.getElementById("petsGrid");
+const emptyMessage = document.getElementById("emptyMessage");
+
+petsGrid.innerHTML = "";
+
+if (pets.length === 0) {
+    petsGrid.hidden = true;
+    emptyMessage.hidden = false;
+    return;
+}
+
+emptyMessage.hidden = true;
+petsGrid.hidden = false;
+
+pets.forEach((pet) => {
+    const card = document.createElement("div");
+    card.className = "pet-card";
+
+    const photo = document.createElement("div");
+    photo.className = "pet-photo";
+
+    if (pet.photo) {
+        const img = document.createElement("img");
+        img.src = pet.photo;
+        img.alt = pet.pet_name || "My pet";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        photo.appendChild(img);
+    } else {
+        photo.textContent = pet.pet_type === "Cat" ? "🐱" : "🐶";
+    }
+
+    const details = document.createElement("div");
+    details.className = "pet-details";
+
+    const name = document.createElement("h3");
+    name.textContent = pet.pet_name || "My Pet";
+    details.appendChild(name);
+
+    const petInfo = [
+        `Type: ${pet.pet_type || "Not specified"}`,
+        `Age: ${pet.age ?? "Not specified"}`,
+        `Gender: ${pet.gender || "Not specified"}`,
+        `Weight: ${pet.weight ? pet.weight + " kg" : "Not specified"}`
+    ];
+
+    petInfo.forEach((info) => {
+        const p = document.createElement("p");
+        p.textContent = info;
+        details.appendChild(p);
+    });
+
+    const viewButton = document.createElement("button");
+
+viewButton.className = "view-btn";
+viewButton.type = "button";
+viewButton.textContent = "View Vaccination Records";
+
+viewButton.addEventListener("click", () => {
+    const params = new URLSearchParams({
+        petId: pet.id,
+        petName: pet.pet_name,
+        petType: pet.pet_type
+    });
+
+    window.location.href = `vaccination.html?${params.toString()}`;
+});
+
+details.appendChild(viewButton);
+
+
+const deleteButton = document.createElement("button");
+
+deleteButton.className = "view-btn delete-btn";
+deleteButton.type = "button";
+deleteButton.textContent = "Delete Pet";
+
+
+deleteButton.addEventListener("click", async () => {
+    const confirmed = confirm(
+        `Are you sure you want to delete ${pet.pet_name}'s profile? This cannot be undone.`
+    );
+
+    if (!confirmed) return;
+
+    try {
+        const { data, error } = await supabaseClient.auth.getSession();
+
+        if (error || !data.session) {
+            alert("Please log in again.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const response = await fetch(
+            `https://pet-optimization-backend.chaudharyananya267.workers.dev/api/pets/${pet.id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${data.session.access_token}`
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(result.error || "Could not delete this pet.");
+            return;
+        }
+
+        alert(`${pet.pet_name}'s profile was deleted successfully.`);
+        await loadMyPets();
+
+    } catch (error) {
+        console.error("Delete pet error:", error);
+        alert("Could not connect to the backend. Please try again.");
+    }
+});
+
+
+details.appendChild(deleteButton);
+
+
+    card.appendChild(photo);
+    card.appendChild(details);
+    petsGrid.appendChild(card);
+});
+
+    } catch (error) {
+        console.error("Error loading pets:", error);
+        alert("Could not load your pets. Please try again.");
+    }
+}
+loadMyPets();
+    
+    </script>
+</body>
+</html>

@@ -1,2 +1,5 @@
 node_modules/
 .env
+pets-backup.json
+vaccinations-backup.json
+backend/worker-backup.txt

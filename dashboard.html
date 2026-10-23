@@ -521,9 +521,11 @@ function openDisease() {
 }
 
         function openVaccination() {
+    console.log("ID sent to Vaccination:", selectedPetId);
+
     window.location.href =
         "vaccination.html?petId=" +
-        encodeURIComponent(localStorage.getItem("petId") || "");
+        encodeURIComponent(selectedPetId || "");
 }
     </script>
 
